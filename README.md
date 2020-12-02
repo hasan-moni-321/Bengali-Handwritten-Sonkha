@@ -8,7 +8,7 @@
  In this project I used end-to-end opensource platform Tensorflow. For Data preprocessing I used cv2 for example GaussianBlur, AddWeight and alos added some kernel           to the image to get specific color of images to train properly.                                                                                                      
  I have built convolutional neural network model, because it is the image classification. I took 20% validation data from the train dataset. In this model I used Adam optimizer where learing rate is "1e-3"
  
- #### Accuracy
+ #### Accuracy and Loss
  | Train_Validation | Accuracy | Loss |
  | --- | --- | --- |
  | Train | .9955 | 0.0161 |
