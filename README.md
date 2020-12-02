@@ -31,5 +31,11 @@
   | Validation | 0.011 |
   | Test | | .8901 |
   
+  #### Future Update
+  1. You can check with different VGG model, resnet, efficient, mobilenet, densenet
   
+  ### Reference
+  1. https://www.tensorflow.org/tutorials/images/classification
+  2. https://keras.io/examples/vision/image_classification_from_scratch/
+  3. https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
   
