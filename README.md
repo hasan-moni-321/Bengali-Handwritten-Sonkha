@@ -25,10 +25,11 @@
   For model used VGG16 and this model is modified by building the layer.  CrossEntropyLoss and Adam optimizer are used 
   
   #### Accuracy and Loss
-  | Train_Validation | Loss |
-  | --- | --- |
-  | Train | 0.014 |
+  | Train_Validation | Loss | Accuracy|
+  | --- | --- | --- |
+  | Train | 0.014 | |
   | Validation | 0.011 |
+  | Test | .8901| 
   
   
   
