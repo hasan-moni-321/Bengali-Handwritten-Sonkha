@@ -15,12 +15,20 @@
  | Validation | 0.9826 | 0.0885 |
  
  
-  ### Future Update
+  #### Future Update
   1. For image processing you can use albumentation, imgaug library those are very helpful for image during training. 
   1. Use of pretrained model like resenet34, resnet50, efficientnetb4 those gives very good result 
   
   
+  ### Bengali Sonkha Pytorch
+  Here I used opensource pytorch scientific library. I used custom-dataset and for image transformation used torchvision transforms.                            
+  For model used VGG16 and this model is modified by building the layer.  CrossEntropyLoss and Adam optimizer are used 
   
+  #### Accuracy and Loss
+  | Train_Validation | Loss |
+  | --- | --- |
+  | Train | 0.014 |
+  | Validation | 0.011 |
   
   
   
