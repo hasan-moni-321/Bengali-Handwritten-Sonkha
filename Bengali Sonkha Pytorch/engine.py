@@ -32,7 +32,7 @@ def train(train_data, model, optimizer, device, criterion, epoch):
 
 
 
-def valid(valid_data, model, criterion, device, epoch):
+def valid(valid_data, model, criterion, device, epoch, early_stopping):
     valid_losses = []
     valid_loss = 0
 
@@ -45,6 +45,13 @@ def valid(valid_data, model, criterion, device, epoch):
         loss = criterion(output, target)
 
         valid_loss += loss.item() * data.size(0)
+        
+    # applying early stopping    
+    early_stopping(valid_loss, model)
+        
+     if early_stopping.early_stop:
+            print("Early stopping")
+            break
 
     # calculate-average-losses
     valid_loss = valid_loss/len(valid_data.sampler)
