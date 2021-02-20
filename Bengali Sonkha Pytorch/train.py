@@ -14,8 +14,10 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 
 import model 
+import models 
 import dataset 
 import engine
+from Early_Stopping_Implementation import EarlyStopping
 
 # Path of the datasets
 train_img = "/home/hasan/Data Set/Bengali Digit/training-a"
@@ -36,7 +38,8 @@ train_transf = transforms.Compose([
                                     transforms.RandomCrop(32, padding=4),
                                     transforms.RandomHorizontalFlip(),
                                     transforms.ToTensor(),
-                                    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                         std=[0.229, 0.224, 0.225]),
                                     ])
 train_data = dataset.ImageData(df = train_labels, data_dir = train_img, resize=50, transform = train_transf)
 train_loader = DataLoader(dataset = train_data, batch_size = 64)
@@ -52,7 +55,8 @@ valid_loader = DataLoader(dataset = valid_data, batch_size = 64, shuffle=True, n
 #test_transf = transforms.Compose([transforms.ToPILImage(), transforms.ToTensor()])
 transform_test = transforms.Compose([
                                     transforms.ToTensor(),
-                                    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+                                    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                         std=[0.229, 0.224, 0.225]),
                                     ])
 test_data = dataset.ImageData(df = test_labels, data_dir = test_img, resize=50, transform = transform_test)
 test_loader = DataLoader(dataset = test_data, batch_size = 64, shuffle=False, num_workers=2) 
@@ -60,12 +64,14 @@ test_loader = DataLoader(dataset = test_data, batch_size = 64, shuffle=False, nu
 
 
 # loading model and device
-model = model.VGG("VGG16")
+#model = model.VGG("VGG16")
+model = models.model4
 model.to(device)
 
 # loss and optimizer 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3) 
+early_stopping = EarlyStopping(patience=10, verbose=True)
 
 
 # Training The Model
@@ -88,7 +94,8 @@ for epoch in range(epochs):
                 model, 
                 criterion, 
                 device,
-                epoch
+                epoch,
+                early_stopping
                 )
     valid_losses.append(valid_loss) 
 
